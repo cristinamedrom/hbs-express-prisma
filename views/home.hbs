@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de Post</title>
+</head>
+
+<body>
+    {{> navigation}}
+    {{{bodyContent}}}
+    <br>
+    <div>
+        {{#each posts}}
+        <div>
+            <h2>{{title}}</h2>
+            <p>{{content}}</p>
+            <p>Publicado: {{published}}</p>
+            <a href="/post/{{id}}">Ver Detalles</a>
+        </div>
+        {{/each}}
+    </div>
+    <br>
+    <div>
+        <h1>{{title}}</h1>
+        <p>{{content}}</p>
+        <p>Publicado: {{published}}</p>
+        <a href="/post">Volver a la Lista</a>
+    </div>
+    <br>
+    <div>
+        <h1>{{#if post}}Actualizar{{else}}Crear{{/if}} Post</h1>
+        <form action="{{#if post}}/post/{{post.id}}{{else}}/post{{/if}}" method="POST">
+            <label for="title">Título:</label>
+            <input type="text" id="title" name="title" value="{{#if post}}{{post.title}}{{/if}}" required>
+            <br>
+            <label for="content">Contenido:</label>
+            <textarea id="content" name="content">{{#if post}}{{post.content}}{{/if}}</textarea>
+            <br>
+            <label for="published">Publicado:</label>
+            <input type="checkbox" id="published" name="published" {{#if post.published}}checked{{/if}}>
+            <br>
+            <button type="submit">{{#if post}}Actualizar{{else}}Crear{{/if}}</button>
+        </form>
+        {{#if post}}
+        <a href="/post/{{post.id}}">Cancelar</a>
+        {{else}}
+        <a href="/post">Cancelar</a>
+        {{/if}}
+    </div>
+</body>
+
+</html>

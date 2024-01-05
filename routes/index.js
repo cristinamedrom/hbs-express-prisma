@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const postRoutes = require('./posted');
 
-// tus rutas aqui
+router.use('/', postRoutes);
 
 module.exports = router;
